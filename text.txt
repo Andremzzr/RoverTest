@@ -1,0 +1,34 @@
+function handleInput(string){
+    const input = string.split('\n');
+    const initialLocation = input[0].replace(/\s/g, '');
+    const grid = new Grid(initialLocation[0],initialLocation[1]);
+
+    const rover1Info = input[1].replace(/\s/g, '');
+    const rover1Moves = input[2].replace(/\s/g, '').split('');
+    
+    const rover2Info = input[3].replace(/\s/g, '');
+    const rover2Moves = input[4].replace(/\s/g, '');
+
+    const rover1 = new Rover(rover1Info[0],rover1Info[1],rover1Info[2],grid);
+    console.log(rover1Info[0]);
+    console.log(rover1Info[1]);
+    console.log(rover1Info[2]);
+
+    for (let i = 0; i < rover1Moves.length; i++) {
+        const command = rover1Moves[i];
+        console.log(`command: ${command}`)
+        rover1.handleInputCommands(command);
+    }
+    
+
+    rover1.returnLocation()
+    const rover2 = new Rover(rover2Info[0],rover2Info[1],rover2Info[2],grid);
+
+    for (let i = 0; i < rover2Moves.length; i++) {
+        const command = rover2Moves[i];
+        console.log(`command: ${command}`)
+        rover2.handleInputCommands(command);
+    }
+
+    rover2.returnLocation()
+}
