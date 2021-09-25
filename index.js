@@ -31,13 +31,17 @@ function handleInput(string){
 }
 
 
+/**
+ * OUTPUT:
+ *  rover position:
+    x:1 y:3
 
+    rover position:
+    x:5 y:1
+ */
 handleInput(`5 5 
 1 2 N 
 LMLMLMLMM 
 3 3 E 
-MMRMMRMRRM
-0 1 N
-RM
-1 2 N
-LMLMRM`);
+MMRMMRMRRM`);
+ 
