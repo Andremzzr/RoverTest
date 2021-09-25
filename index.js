@@ -14,10 +14,10 @@ function handleInput(string){
     for (let i = 1; i < input.length; i++) {
         if(i % 2 != 0){
             const roverInfo = input[i].replace(/\s/g, '');
-            rover = new Rover(roverInfo[0],roverInfo[1],roverInfo[2],grid);
+            rover = new Rover(roverInfo[0],roverInfo[1],roverInfo[2].toLocaleUpperCase(),grid);
         }
         else{
-            const roverMoves = input[i].replace(/\s/g, '').split('');
+            const roverMoves = input[i].toLocaleUpperCase().replace(/\s/g, '').split('');
             for (let index = 0; index < roverMoves.length;index++) {
                 const command = roverMoves[index];
                 rover.handleInputCommands(command);
@@ -38,4 +38,6 @@ LMLMLMLMM
 3 3 E 
 MMRMMRMRRM
 0 1 N
-RM`);
+RM
+1 2 N
+LMLMRM`);

@@ -7,23 +7,58 @@ module.exports = class Rover{
     }
 
     returnLocation(){
+        this._grid.pushToPosition(`x:${this._x} y:${this._y}`);
         console.log(`rover position:\nx:${this._x} y:${this._y}\n`);
     }
 
     handleInputCommands(command){
-        if(command != 'M'){
-            this.whereTheHeadGoesTo(command);
-        }
-        else{
-            if(this.canRoverMove()){
-                this.move();
+        if(command == 'M' || command == 'R' || command == 'L'){
+            if(command != 'M'){
+                this.whereTheHeadGoesTo(command);
             }
             else{
-                console.log(`rover has stoped`);
+                if(this.canRoverMove() && this.positionOccupied()){
+                    this.move();
+                }
+                else{
+                    console.log(`rover has stoped`);
+                }
             }
         }
     }
-   
+    
+    positionOccupied(){
+        switch (this._head) {
+            case 'N':
+                if(this._grid.returnPositions().includes(`x:${this._x} y:${this._y + 1}`)){
+                    console.log('ta ocupado');
+                    return false;
+                }
+                return true;
+                break;
+            case 'S':
+                if(this._grid.returnPositions().includes(`x:${this._x} y:${this._y - 1}`)){
+                    console.log('ta ocupado');
+                    return false;
+                }
+                return true;
+            case 'E':
+                if(this._grid.returnPositions().includes(`x:${this._x + 1} y:${this._y}`)){
+                    console.log('ta ocupado');
+                    return false;
+                }
+                return true;
+            case 'W':
+                if(this._grid.returnPositions().includes(`x:${this._x - 1} y:${this._y}`)){
+                    console.log('ta ocupado');
+                    return false;
+                }
+                return true;
+            default:
+                break;
+        }
+        
+    }
 
     whereTheHeadGoesTo(move){
        switch (this._head) {
@@ -65,7 +100,9 @@ module.exports = class Rover{
         
     }
 
-    canRoverMove(){
+
+    
+    canRoverMove(){        
         switch (this._head) {
             case 'N':
                if(this._y == this._grid.getMaxY()){
